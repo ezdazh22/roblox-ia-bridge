@@ -10,7 +10,10 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemi
 
 app.post('/ask', async (req, res) => {
     const userMessage = req.body.message;
+    console.log("Requête reçue :", userMessage);   // <-- ceci apparaîtra dans les logs Render
+
     if (!userMessage) {
+        console.log("Message manquant");
         return res.status(400).send("Message manquant");
     }
 
@@ -22,10 +25,11 @@ app.post('/ask', async (req, res) => {
         });
 
         const aiResponse = response.data.candidates[0].content.parts[0].text;
+        console.log("Réponse Gemini :", aiResponse);
         res.send(aiResponse);
     } catch (error) {
-        console.error(error.response?.data || error.message);
-        res.status(500).send("Erreur IA");
+        console.error("Erreur Gemini :", error.response?.data || error.message);
+        res.status(500).send("Erreur IA : " + (error.response?.data?.error?.message || error.message));
     }
 });
 
