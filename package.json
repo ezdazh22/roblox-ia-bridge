@@ -1,0 +1,10 @@
+{
+  "name": "roblox-gemini-bridge",
+  "version": "1.0.0",
+  "description": "Bridge between Roblox and Gemini API",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  }
+}
