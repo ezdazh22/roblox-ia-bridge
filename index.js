@@ -5,13 +5,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Lecture de la clé API depuis l'environnement
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-console.log("🔑 Clé API lue :", GEMINI_API_KEY ? "✅ Présente (commence par " + GEMINI_API_KEY.substring(0,10) + "...)" : "❌ MANQUANTE");
+console.log("🔑 Clé API lue :", GEMINI_API_KEY ? "✅ Présente" : "❌ MANQUANTE");
 
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+// Correction : utiliser gemini-1.0-pro au lieu de gemini-pro
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${GEMINI_API_KEY}`;
 
-// Route de ping pour UptimeRobot
 app.get('/ping', (req, res) => {
     res.send("ok");
 });
