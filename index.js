@@ -8,8 +8,8 @@ app.use(express.json());
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 console.log("🔑 Clé API lue :", GEMINI_API_KEY ? "✅ Présente" : "❌ MANQUANTE");
 
-// Utilisation du modèle gemini-1.5-flash (gratuit, rapide)
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+// Utilisation de gemini-2.0-flash (gratuit, rapide, 1M de contexte)
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 app.get('/ping', (req, res) => {
     res.send("ok");
