@@ -8,13 +8,22 @@ app.use(express.json());
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
 
+// Route de ping pour garder le serveur réveillé
+app.get('/ping', (req, res) => {
+    res.send("ok");
+});
+
 app.post('/ask', async (req, res) => {
     const userMessage = req.body.message;
-    console.log("Requête reçue :", userMessage);   // <-- ceci apparaîtra dans les logs Render
+    console.log("Requête reçue :", userMessage);
 
     if (!userMessage) {
-        console.log("Message manquant");
         return res.status(400).send("Message manquant");
+    }
+
+    if (!GEMINI_API_KEY) {
+        console.error("Clé API manquante");
+        return res.status(500).send("Configuration serveur incomplète");
     }
 
     try {
